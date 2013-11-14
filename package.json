@@ -16,18 +16,18 @@
     "express": "3.x",
     "ejs": "*",
     "colors": "*",
-    "lodash": "*",
+    "lodash": "*"
   },
   "devDependencies": {
   },
   "keywords": [
     "tournament",
     "manager",
-    "controller",
+    "controller"
   ],
   "repository": {
     "type": "git",
     "url": "git://github.com/ivanseidel/tournament-manager"
   },
-  "main": "index",
+  "main": "index"
 }
