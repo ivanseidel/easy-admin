@@ -1,0 +1,33 @@
+{
+  "name": "tournamnet-manager",
+  "description": "Create and manage tournamnets easyly",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ivan Seidel Gomes",
+    "email": "ivanseidel@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Ivan Seidel Gomes",
+      "email": "ivanseidel@gmail.com"
+    } 
+  ],
+  "dependencies": {
+    "express": "3.x",
+    "ejs": "*",
+    "colors": "*",
+    "lodash": "*",
+  },
+  "devDependencies": {
+  },
+  "keywords": [
+    "tournament",
+    "manager",
+    "controller",
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ivanseidel/tournament-manager"
+  },
+  "main": "index",
+}
