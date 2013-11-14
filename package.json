@@ -16,7 +16,8 @@
     "express": "3.x",
     "ejs": "*",
     "colors": "*",
-    "lodash": "*"
+    "lodash": "*",
+    "waterline": "*"
   },
   "devDependencies": {
   },
