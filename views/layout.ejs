@@ -54,183 +54,183 @@
 
 	<body>
 
-		<!-- Fixed navbar -->
-		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="<%= _projectPath %>"><%= _projectName%></a>
-				</div>
-				<div class="navbar-collapse collapse">
-
-					<!-- Navigation bar (topMenu) -->
-					<ul class="nav navbar-nav">
-						
-						<% for(var i in _menus){ %>
-							<% var menu = _menus[i]; %>
-
-							<% if(menu.childs && menu.childs.length > 0){ %>
-								<!-- Dropdown -->
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= menu.name %> <b class="caret"></b></a>
-
-									<ul class="dropdown-menu">
-										<% menus = menu.childs %>
-										<% 	
-											for(var j = 0; j < menus.length; ){
-												var item = menus[j];
-												if(item.childs && item.childs.length > 0){
-													%>
-													<% if(j > 0){ %>
-														<li class="divider"></li>
-													<% } %>
-													<% if(item.name){ %>
-														<li class="dropdown-header"><%= item.name %></li>
-													<% }%>
-													<%
-													for(var g in item.childs){
-													%>
-														<li><%- linkItem(item.childs[g]) %></li>
-													<%
-													}
-												}else{
-												%>
-													<li><%- linkItem(item) %></li>
-												<%
-												}
-										%>
-										<%	j++;
-											}
-										%>
-									</ul>
-								</li>
-							<% }else{ %>
-								<!-- Simple item -->
-								<li class="<%- getActiveClass(menu.path, true) %>"><%- linkItem(menu) %></li>
-							<% } %>
-						<% } %>
-
-					</ul>
-
-					<!-- Private menu -->
-					<ul class="nav navbar-nav navbar-right">
-						<% for(var i in _menusPrivate){ %>
-							<% var menu = _menusPrivate[i]; %>
-
-							<% if(menu.childs && menu.childs.length > 0){ %>
-								<!-- Dropdown -->
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= menu.name %> <b class="caret"></b></a>
-
-									<ul class="dropdown-menu">
-										<% menus = menu.childs %>
-										<% 	
-											for(var j = 0; j < menus.length; ){
-												var item = menus[j];
-												if(item.childs && item.childs.length > 0){
-													%>
-													<% if(j > 0){ %>
-														<li class="divider"></li>
-													<% } %>
-													<% if(item.name){ %>
-														<li class="dropdown-header"><%= item.name %></li>
-													<% }%>
-													<%
-													for(var g in item.childs){
-													%>
-														<li><%- linkItem(item.childs[g]) %></li>
-													<%
-													}
-												}else{
-												%>
-										
-												<li><a href="<%= (item.path ? item.path : '#') %>" class="<%- getActiveClass(item.path) %>">
-													<% if(item.icon){ %>
-														<span class="glyphicon glyphicon-<%= item.icon %>"></span>
-													<% } %>
-													<%= item.name %>
-												</a></li>
-										
-												<%
-												}
-										%>
-										<%	j++;
-											}
-										%>
-									</ul>
-								</li>
-							<% }else{ %>
-								<!-- Simple item -->
-								<li><a href="<%= (menu.path ? menu.path : '#') %>" class="<%- getActiveClass(menu.path) %>">
-									<% if(menu.icon){ %>
-										<span class="glyphicon glyphicon-<%= menu.icon %>"></span>
-									<% } %>
-									<%= menu.name %>
-								</a></li>
-							<% } %>
-						<% } %>
-					</ul>
-				</div><!--/.nav-collapse -->
-			</div>
-		</div>
-
-		<div class="container">
-
-			<% if(!sideMenu) {%>
-
-				<div class="row">
-					<div class="col-xs-12">
-						<%- _content %>
+		<div id="wrap">
+			<!-- Fixed navbar -->
+			<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="<%= _projectPath %>"><%= _projectName%></a>
 					</div>
-				</div>
+					<div class="navbar-collapse collapse">
 
-			<% }else{ %>
+						<!-- Navigation bar (topMenu) -->
+						<ul class="nav navbar-nav">
+							
+							<% for(var i in _menus){ %>
+								<% var menu = _menus[i]; %>
 
-				<div class="row">
-					<div class="col-xm-12 col-sm-4 col-md-3" role="navigation">
+								<% if(menu.childs && menu.childs.length > 0){ %>
+									<!-- Dropdown -->
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= menu.name %> <b class="caret"></b></a>
 
-						<!-- <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar"> -->
-						<ul class="list-group">
-							<% for(var item in sideMenu){ %>
-								<% var menu = sideMenu[item]; %>
-
-								<a href="<%= (sideMenu[item].path ? sideMenu[item].path : '#') %>" class="list-group-item <%- getActiveClass(sideMenu[item].path) %>">
-									<% if(menu.icon){ %>
-										<span class="glyphicon glyphicon-<%= menu.icon %>"></span>
-									<% } %>
-									<% if(menu.badge){ %>
-										<span class="badge pull-right"><%= menu.badge %></span>
-									<% } %>
-									<%= menu.name %>
-								</a>
-								<% %>
-
+										<ul class="dropdown-menu">
+											<% menus = menu.childs %>
+											<% 	
+												for(var j = 0; j < menus.length; ){
+													var item = menus[j];
+													if(item.childs && item.childs.length > 0){
+														%>
+														<% if(j > 0){ %>
+															<li class="divider"></li>
+														<% } %>
+														<% if(item.name){ %>
+															<li class="dropdown-header"><%= item.name %></li>
+														<% }%>
+														<%
+														for(var g in item.childs){
+														%>
+															<li><%- linkItem(item.childs[g]) %></li>
+														<%
+														}
+													}else{
+													%>
+														<li><%- linkItem(item) %></li>
+													<%
+													}
+											%>
+											<%	j++;
+												}
+											%>
+										</ul>
+									</li>
+								<% }else{ %>
+									<!-- Simple item -->
+									<li class="<%- getActiveClass(menu.path, true) %>"><%- linkItem(menu) %></li>
+								<% } %>
 							<% } %>
+
 						</ul>
 
-					</div>
-					<div class="col-xm-12 col-sm-8 col-md-9">
-						<%- _content %>
-					</div>
+						<!-- Private menu -->
+						<ul class="nav navbar-nav navbar-right">
+							<% for(var i in _menusPrivate){ %>
+								<% var menu = _menusPrivate[i]; %>
+
+								<% if(menu.childs && menu.childs.length > 0){ %>
+									<!-- Dropdown -->
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= menu.name %> <b class="caret"></b></a>
+
+										<ul class="dropdown-menu">
+											<% menus = menu.childs %>
+											<% 	
+												for(var j = 0; j < menus.length; ){
+													var item = menus[j];
+													if(item.childs && item.childs.length > 0){
+														%>
+														<% if(j > 0){ %>
+															<li class="divider"></li>
+														<% } %>
+														<% if(item.name){ %>
+															<li class="dropdown-header"><%= item.name %></li>
+														<% }%>
+														<%
+														for(var g in item.childs){
+														%>
+															<li><%- linkItem(item.childs[g]) %></li>
+														<%
+														}
+													}else{
+													%>
+											
+													<li><a href="<%= (item.path ? item.path : '#') %>" class="<%- getActiveClass(item.path) %>">
+														<% if(item.icon){ %>
+															<span class="glyphicon glyphicon-<%= item.icon %>"></span>
+														<% } %>
+														<%= item.name %>
+													</a></li>
+											
+													<%
+													}
+											%>
+											<%	j++;
+												}
+											%>
+										</ul>
+									</li>
+								<% }else{ %>
+									<!-- Simple item -->
+									<li><a href="<%= (menu.path ? menu.path : '#') %>" class="<%- getActiveClass(menu.path) %>">
+										<% if(menu.icon){ %>
+											<span class="glyphicon glyphicon-<%= menu.icon %>"></span>
+										<% } %>
+										<%= menu.name %>
+									</a></li>
+								<% } %>
+							<% } %>
+						</ul>
+					</div><!--/.nav-collapse -->
 				</div>
+			</div>
 
-			<% } %>
-			<!-- Main component for a primary marketing message or call to action -->
-			<!-- <div class="jumbotron">
-				<h1>Navbar example</h1>
-				<p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-				<p>To see the difference between static and fixed top navbars, just scroll.</p>
-				<p>
-					<a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-				</p>
-			</div> -->
+			<div class="container">
 
-		</div> <!-- /container -->
+				<% if(!sideMenu) {%>
+
+					<div class="row">
+						<div class="col-xs-12">
+							<%- _content %>
+						</div>
+					</div>
+
+				<% }else{ %>
+
+					<div class="row">
+						<div class="col-xm-12 col-sm-4 col-md-3" role="navigation">
+
+							<!-- <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar"> -->
+							<ul class="list-group">
+								<% for(var item in sideMenu){ %>
+									<% var menu = sideMenu[item]; %>
+
+									<a href="<%= (sideMenu[item].path ? sideMenu[item].path : '#') %>" class="list-group-item <%- getActiveClass(sideMenu[item].path) %>">
+										<% if(menu.icon){ %>
+											<span class="glyphicon glyphicon-<%= menu.icon %>"></span>
+										<% } %>
+										<% if(menu.badge){ %>
+											<span class="badge pull-right"><%= menu.badge %></span>
+										<% } %>
+										<%= menu.name %>
+									</a>
+									<% %>
+
+								<% } %>
+							</ul>
+
+						</div>
+						<div class="col-xm-12 col-sm-8 col-md-9">
+							<%- _content %>
+						</div>
+					</div>
+
+				<% } %>
+
+			</div> <!-- /container -->
+
+		</div> <!-- /wrap -->
+
+		<div id="footer">
+			<div class="container">
+				<p class="text-muted credit">© 2013 All rights reserved | Developed by <a target="_blank" href="http://tendadigital.net">Ivan Seidel</a>.</p>
+			</div>
+    </div>
 
 	</body>
 </html>

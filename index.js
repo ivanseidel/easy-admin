@@ -1,2 +1,2 @@
 
-module.exports = require('./lib/tournament');
+module.exports = require('./controllers/tournament');
