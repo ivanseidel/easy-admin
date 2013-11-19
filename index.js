@@ -1,2 +1,14 @@
+/**
+ * Module dependencies.
+ */
+var colors = require('colors');
 
-module.exports = require('./controllers/tournament');
+
+/**
+ * Expose Constructors
+ */
+module.exports.Controller = require('./lib/controller');
+
+module.exports.ModelViewController = require('./lib/crud');
+
+// module.exports.View = require('./controllers/view');

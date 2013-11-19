@@ -1,0 +1,40 @@
+<div class="row">
+
+	<div class="col-xs-6">
+		<div class="panel panel-warning">
+			<div class="panel-heading">Instaled Modules</div>
+
+			<div class='"panel-body'>
+				<p>AEW</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-xs-6">
+
+		<div class="panel panel-info">
+			<div class="panel-heading">Instaled Modules</div>
+
+			<div class="list-group">
+
+				<% for(var k in modules){
+					var module = modules[k];
+				%>
+
+					<a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading">
+							<span class="label label-primary pull-right">v<%= module.version %></span>
+							<%= module.name %>
+						</h4>
+						<p class="list-group-item-text">
+							<%= module.desc %>
+						</p>
+					</a>
+
+				<% } %>
+			</div> 
+		</div>
+
+	</div>
+
+</div>

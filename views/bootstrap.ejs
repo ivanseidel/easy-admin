@@ -16,7 +16,7 @@
 		<!-- Custom styles for this template -->
 		<link href="/css/template.css" rel="stylesheet">
 
-		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="/js/jquery-1.10.2.min.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
 
 		<!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -30,18 +30,21 @@
 	</head>
 
 	<%
-		function linkItem(item){
-			if(item.path)
-				return '<a href="'+item.path+'">'+item.name+'</a>';
+		function realPath(path){
+			if(!path)
+				return '#';
 
-			return '<a href="#">'+item.name+'</a>';
+			if(path.path)
+				path = path.path;
+
+			return _rootUrl + path;
 		};
 
 		function isCurrentPage(path, pseudoMatch){
 			if(pseudoMatch)
-				return (pathname.indexOf(path) >= 0);
+				return (realPath(_pathName).indexOf(path) >= 0);
 
-			return (pathname == path);
+			return (_pathName == realPath(path));
 		};
 
 		/*
@@ -49,6 +52,17 @@
 		 */
 		function getActiveClass(path, pseudoMatch){
 			return (isCurrentPage(path, pseudoMatch) ? 'active' : '');
+		}
+
+		/*
+		 * Render a badge
+		 */
+		function renderBadge(badge, addClasses){
+			if(!badge)
+				return '';
+
+			// Is a string
+			return '<span class="badge '+addClasses+'">'+badge+'</span>';
 		}
 	%>
 
@@ -65,7 +79,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="<%= _projectPath %>"><%= _projectName%></a>
+						<a class="navbar-brand" href="<%= (_rootUrl ? _rootUrl : '/') %>"><%= _projectName%></a>
 					</div>
 					<div class="navbar-collapse collapse">
 
@@ -101,7 +115,15 @@
 														}
 													}else{
 													%>
-														<li><%- linkItem(item) %></li>
+											
+													<li><a href="<%= realPath(item) %>" class="<%- getActiveClass(item) %>">
+														<% if(item.icon){ %>
+															<span class="glyphicon glyphicon-<%= item.icon %>"></span>
+														<% } %>
+														<%= item.name %> 
+														<%- renderBadge(item.badge) %>
+													</a></li>
+											
 													<%
 													}
 											%>
@@ -112,7 +134,15 @@
 									</li>
 								<% }else{ %>
 									<!-- Simple item -->
-									<li class="<%- getActiveClass(menu.path, true) %>"><%- linkItem(menu) %></li>
+									<li class="<%- getActiveClass(menu.path, true) %>">
+										<a href="<%= realPath(menu) %>">
+											<% if(menu.icon){ %>
+												<span class="glyphicon glyphicon-<%= menu.icon %>"></span>
+											<% } %>
+											<%= menu.name %> 
+											<%- renderBadge(menu.badge) %>
+										</a>
+									</li>
 								<% } %>
 							<% } %>
 
@@ -150,11 +180,12 @@
 													}else{
 													%>
 											
-													<li><a href="<%= (item.path ? item.path : '#') %>" class="<%- getActiveClass(item.path) %>">
+													<li><a href="<%= realPath(item) %>" class="<%- getActiveClass(item) %>">">
 														<% if(item.icon){ %>
 															<span class="glyphicon glyphicon-<%= item.icon %>"></span>
 														<% } %>
-														<%= item.name %>
+														<%= item.name %> 
+														<%- renderBadge(item.badge) %>
 													</a></li>
 											
 													<%
@@ -167,12 +198,15 @@
 									</li>
 								<% }else{ %>
 									<!-- Simple item -->
-									<li><a href="<%= (menu.path ? menu.path : '#') %>" class="<%- getActiveClass(menu.path) %>">
-										<% if(menu.icon){ %>
-											<span class="glyphicon glyphicon-<%= menu.icon %>"></span>
-										<% } %>
-										<%= menu.name %>
-									</a></li>
+									<li class="<%- getActiveClass(menu.path, true) %>">
+										<a href="<%= realPath(menu) %>">
+											<% if(menu.icon){ %>
+												<span class="glyphicon glyphicon-<%= menu.icon %>"></span>
+											<% } %>
+											<%= menu.name %> 
+											<%- renderBadge(menu.badge) %>
+										</a>
+									</li>
 								<% } %>
 							<% } %>
 						</ul>
@@ -200,13 +234,11 @@
 								<% for(var item in sideMenu){ %>
 									<% var menu = sideMenu[item]; %>
 
-									<a href="<%= (sideMenu[item].path ? sideMenu[item].path : '#') %>" class="list-group-item <%- getActiveClass(sideMenu[item].path) %>">
+									<a href="<%= realPath(sideMenu[item]) %>" class="list-group-item <%- getActiveClass(sideMenu[item].path) %>">
 										<% if(menu.icon){ %>
 											<span class="glyphicon glyphicon-<%= menu.icon %>"></span>
 										<% } %>
-										<% if(menu.badge){ %>
-											<span class="badge pull-right"><%= menu.badge %></span>
-										<% } %>
+										<%- renderBadge(menu.badge, 'pull-right') %>
 										<%= menu.name %>
 									</a>
 									<% %>
@@ -228,7 +260,9 @@
 
 		<div id="footer">
 			<div class="container">
-				<p class="text-muted credit">© 2013 All rights reserved | Developed by <a target="_blank" href="http://tendadigital.net">Ivan Seidel</a>.</p>
+				<p class="text-muted credit">© 2013 All rights reserved | Developed by <a target="_blank" href="http://tendadigital.net">Ivan Seidel</a>.
+					<small class="pull-right">Rendered in <%= (new Date()).getTime() - _startRenderTime %>ms</small>
+				</p>
 			</div>
     </div>
 

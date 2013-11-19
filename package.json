@@ -1,6 +1,6 @@
 {
-  "name": "tournamnet-manager",
-  "description": "Create and manage tournamnets easyly",
+  "name": "easy-admin",
+  "description": "Simple and easy Admin UI with CRUD",
   "version": "0.0.1",
   "author": {
     "name": "Ivan Seidel Gomes",
@@ -17,18 +17,20 @@
     "ejs": "*",
     "colors": "*",
     "lodash": "*",
+    "path": "*",
     "waterline": "*"
   },
   "devDependencies": {
   },
   "keywords": [
-    "tournament",
-    "manager",
-    "controller"
+    "admin",
+    "cms",
+    "crud",
+    "crud"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ivanseidel/tournament-manager"
+    "url": "git://github.com/ivanseidel/easy-admin"
   },
   "main": "index"
 }
