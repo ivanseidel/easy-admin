@@ -1,7 +1,7 @@
 {
   "name": "easy-admin",
   "description": "Simple and easy Admin UI with CRUD",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
     "name": "Ivan Seidel Gomes",
     "email": "ivanseidel@gmail.com"
