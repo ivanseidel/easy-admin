@@ -1,7 +1,7 @@
 <%
 
 function getAttr(key){
-	return model.attributes[key];
+	return modelAttributes[key];
 }
 
 function getAttrName(key, object){
@@ -164,7 +164,7 @@ function attrKey(atrib, key){
 						var name = (attr.name || namefy(id));
 						%>
 
-						<div class="form-group">
+					<div class="form-group <%= id == 'id'?'hide':'' %>">
 					    <label for="<%= id %>"><%= name %></label>
 					    <input type="text" class="form-control" id="<%= id %>" name="<%= id %>" placeholder="Enter <%= name %>">
 					  </div>
